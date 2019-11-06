@@ -1,0 +1,5 @@
+baseURL = "https://blog.otomarukanta.com/"
+canonifyurls = true
+languageCode = "ja"
+title = "おとまるかんたのブログ"
+theme = "mainroad"
