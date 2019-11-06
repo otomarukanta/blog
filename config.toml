@@ -1,5 +1,6 @@
 baseURL = "https://blog.otomarukanta.com/"
 canonifyurls = true
+googleAnalytics = "UA-119109457-1"
 languageCode = "ja"
 title = "おとまるかんたのブログ"
 theme = "mainroad"
