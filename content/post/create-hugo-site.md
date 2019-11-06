@@ -87,7 +87,7 @@ titleを変えるのと、draftの行を消す or falseにする。
 以下のコマンドを実行するだけで、`public`ディレクトリ配下にHTML/CSS/JSが生成されます。
 
 ```
-hugo
+$ hugo
 ```
 
 ## Github Pagesで公開
@@ -98,3 +98,24 @@ https://gohugo.io/hosting-and-deployment/hugo-deploy/
 今回は[Github Pages](https://pages.github.com/)を利用します。
 
 Githubレポジトリを作成し、SettingsにあるGithub Pages
+
+
+
+## GitHub Actionsで自動デプロイ
+
+https://github.com/peaceiris/actions-gh-pages
+
+
+```
+$ ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f gh-pages -N ""
+```
+
+
+githubのレポジトリの
+
+Deploy Keysに公開鍵を追加
+
+
+Allow write accessにチェックを入れるのを忘れずに。
+
+Secretsに秘密鍵を追加
