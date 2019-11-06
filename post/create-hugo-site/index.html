@@ -1,12 +1,10 @@
-<!doctype html><html class=no-js lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Hugoでブログを構築する - おとまるかんたのブログ</title><script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script><meta name=description content><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"><link rel=stylesheet href=https://blog.otomarukanta.com/css/style.css><link rel="shortcut icon" href=https://blog.otomarukanta.com/favicon.ico></head><body class=body><div class="container container--outer"><header class=header><div class=container><div class=logo><a class=logo__link href=https://blog.otomarukanta.com/ title=おとまるかんたのブログ rel=home><div class=logo__title>おとまるかんたのブログ</div></a></div><div class=divider></div></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Hugoでブログを構築する</h1></header><div class="content post__content clearfix"><p>今回はHugoを用いてこのブログを構築していきます。</p><h2 id=hugoとは>Hugoとは</h2><blockquote><p>Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.</p></blockquote><p><a href=https://gohugo.io/>https://gohugo.io/</a></p><p>Go言語で作られた静的サイトジェネレータのOSSです。 Markdownで書かれたものからHTML/CSS/JSを生成してくれるので、生成されたファイルを適当な場所にアップロードするだけでブログなどが公開できます。</p><p>静的サイトジェネレータは他にも以下のようなものがあります。</p><ul><li>jekyll(Ruby製)</li><li>Hexo(Node製)</li></ul><h2 id=hugoの導入方法>Hugoの導入方法</h2><p>公式のインストール方法を見ながらHugoを導入していく。 今回はReleaseページからバイナリを落としてきて利用する。</p><p><a href=https://github.com/gohugoio/hugo/releases>https://github.com/gohugoio/hugo/releases</a></p><pre><code># PATHが通っているところにバイナリを置く
+<!doctype html><html class=no-js lang=ja><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Hugo &#43; Github Pages &#43; Github Actionsでブログを構築する - おとまるかんたのブログ</title><script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script><meta name=description content><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"><link rel=stylesheet href=https://blog.otomarukanta.com/css/style.css><link rel="shortcut icon" href=https://blog.otomarukanta.com/favicon.ico></head><body class=body><div class="container container--outer"><header class=header><div class=container><div class=logo><a class=logo__link href=https://blog.otomarukanta.com/ title=おとまるかんたのブログ rel=home><div class=logo__title>おとまるかんたのブログ</div></a></div><div class=divider></div></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Hugo &#43; Github Pages &#43; Github Actionsでブログを構築する</h1></header><div class="content post__content clearfix"><p>今回はHugoとGithub PagesとGithub Actionsを用いてこのブログを構築していきます。</p><h2 id=構築するブログの要件>構築するブログの要件</h2><p>今回、以下の要件でブログを構築します。</p><ul><li>ブログをMarkdownで書く</li><li>独自ドメインで公開する</li><li>ドメイン代以外は無料で運用する</li><li>HTTPS(SSL)対応</li></ul><p>とてもシンプルな要件なため、Hugo + Github Pages + Github Actionsを採用します。</p><h3 id=hugoとは>Hugoとは</h3><blockquote><p>Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.</p></blockquote><p><a href=https://gohugo.io/>https://gohugo.io/</a></p><p>Go言語で作られた静的サイトジェネレータのOSSです。 Markdownで書かれたものからHTML/CSS/JSを生成してくれるので、生成されたファイルを適当な場所にアップロードするだけでブログなどが公開できます。</p><p>静的サイトジェネレータは他にも以下のようなものがあります。</p><ul><li><a href=https://jekyllrb.com/>Jekyll</a></li><li><a href=https://hexo.io/>Hexo</a></li></ul><p>さらに以下のサイトではもっと多くの静的サイトジェネレータがまとめられています。Next.jsって静的サイトジェネレータになるんですね・・・</p><p><a href=https://www.staticgen.com/>https://www.staticgen.com/</a></p><p>今回はシンプルな要件で十分使えそうなHugoを採用します。</p><h3 id=github-pagesとは>Github Pagesとは</h3><blockquote><p>Hosted directly from your GitHub repository. Just edit, push, and your changes are live.</p></blockquote><p><a href=https://pages.github.com/>https://pages.github.com/</a></p><p>Githubのレポジトリにあげた成果物をもとにウェブサイトが公開できるサービスです。</p><p>類似のホスティングサービスとして以下のようなものがあります。</p><ul><li><a href=https://www.netlify.com/>netlify</a></li><li><a href=https://firebase.google.com/>Firebase</a></li></ul><p>他にもHugoの公式ドキュメントにホスティングサービスとデプロイ方法が多数紹介されています。</p><p><a href=https://gohugo.io/hosting-and-deployment/>https://gohugo.io/hosting-and-deployment/</a></p><p>ほとんどのサービスで独自ドメインとHTTPS(SSL)対応が無料で可能です。
+他のサービスを使わずにすむため、今回はGitHub Pagesを採用します。</p><h3 id=github-actionsとは>Github Actionsとは</h3><blockquote><p>GitHub Actions makes it easy to automate all your software workflows, now with world-class CI/CD. Build, test, and deploy your code right from GitHub. Make code reviews, branch management, and issue triaging work the way you want.</p></blockquote><p><a href=https://github.com/features/actions>https://github.com/features/actions</a></p><p>CI/CDなど自動化をするためのワークフローを定義できるサービスです。</p><p>CI/CDのサービスといえば、他にも以下のようなものがあります。</p><ul><li><a href=https://circleci.com/>CircleCI</a></li><li><a href=https://travis-ci.org/>Travis CI</a></li></ul><p>今回はGitHub Pagesを使っていて、GitHubのみで完結するということでGitHub Actionsを採用します。</p><h2 id=ブログの構築方法>ブログの構築方法</h2><h3 id=hugoの導入>Hugoの導入</h3><p>公式のインストール方法を見ながらHugoを導入していきます。 今回はReleaseページからバイナリを落としてきて利用します。</p><p><a href=https://github.com/gohugoio/hugo/releases>https://github.com/gohugoio/hugo/releases</a></p><pre><code># PATHが通っているところにバイナリを置く
 $ curl -sL https://github.com/gohugoio/hugo/releases/download/v0.59.1/hugo_0.59.1_Linux-64bit.tar.gz | tar zxv -C ~/bin/ hugo
 hugo
 $ hugo version
 Hugo Static Site Generator v0.59.1-D5DAB232 linux/amd64 BuildDate: 2019-10-31T15:21:02Z
-サイト作成
-Hugoで管理していく設定ファイルやディレクトリ構成を作成していきます。 以下のコマンドを実行することで、blogディレクトリにひな形が生成されます。
-
-$ hugo new site blog
+</code></pre><h3 id=サイト作成>サイト作成</h3><p>Hugoで管理していく設定ファイルやディレクトリ構成を作成していきます。 以下のコマンドを実行することで、blogディレクトリにひな形が生成されます。</p><pre><code>$ hugo new site blog
 Congratulations! Your new Hugo site is created in /home/kanta/src/github.com/otomarukanta/blog.
 
 Just a few more steps and you're ready to go:
@@ -19,28 +17,62 @@ Just a few more steps and you're ready to go:
 3. Start the built-in live server via &quot;hugo server&quot;.
 
 Visit https://gohugo.io/ for quickstart guide and full documentation.
-</code></pre><h2 id=テーマ設定>テーマ設定</h2><p>次にサイトのデザインにテーマはMainroadを利用する。 <a href=https://themes.gohugo.io/mainroad/>https://themes.gohugo.io/mainroad/</a></p><pre><code># テーマの設定
-$ git submodule add https://github.com/vimux/mainroad themes/mainroad
-Cloning into '/home/kanta/src/github.com/otomarukanta/blog/themes/mainroad'...
-remote: Enumerating objects: 17, done.
-remote: Counting objects: 100% (17/17), done.
-remote: Compressing objects: 100% (16/16), done.
-remote: Total 1652 (delta 6), reused 7 (delta 1), pack-reused 1635
-Receiving objects: 100% (1652/1652), 933.85 KiB | 1.18 MiB/s, done.
-Resolving deltas: 100% (951/951), done.
+</code></pre><h3 id=テーマ設定>テーマ設定</h3><p>次にサイトのデザインにテーマは<a href=https://themes.gohugo.io/mainroad/>Mainroad</a>を利用します。
+submodule追加と設定ファイル編集だけで簡単に反映ができます。</p><pre><code>$ git submodule add https://github.com/vimux/mainroad themes/mainroad
+
 # config.tomlに以下の設定を追加してテーマを反映させる。
 # theme = &quot;mainroad&quot;
 $ vim config.toml
-</code></pre><h2 id=記事作成>記事作成</h2><p>以下のコマンドで記事を作成します。</p><pre><code>$ hugo new post/create-hugo-site.md
+</code></pre><h3 id=記事作成>記事作成</h3><p>以下のコマンドで記事を作成します。</p><pre><code>$ hugo new post/create-hugo-site.md
 ---
 title: &quot;Create Hugo Site&quot;
 date: 2019-11-06T00:00:00+09:00
 draft: true
 ---
-</code></pre><p>titleを変えるのと、draftの行を消す or falseにする。</p><p>そして、本文を書き始めます。 今回はこの記事を書いています。</p><h2 id=html-css-js生成>HTML/CSS/JS生成</h2><p>以下のコマンドを実行するだけで、<code>public</code>ディレクトリ配下にHTML/CSS/JSが生成されます。</p><pre><code>$ hugo
-</code></pre><h2 id=github-pagesで公開>Github Pagesで公開</h2><p>生成されたファイルを使うことで、Blogとして公開することができます。
-公式ドキュメントにはGCP/AWS/Azureといったパブリッククラウドのオブジェクトストレージを利用した
-<a href=https://gohugo.io/hosting-and-deployment/hugo-deploy/>https://gohugo.io/hosting-and-deployment/hugo-deploy/</a>
-今回は<a href=https://pages.github.com/>Github Pages</a>を利用します。</p><p>Githubレポジトリを作成し、SettingsにあるGithub Pages</p><h2 id=github-actionsで自動デプロイ>GitHub Actionsで自動デプロイ</h2><p><a href=https://github.com/peaceiris/actions-gh-pages>https://github.com/peaceiris/actions-gh-pages</a></p><pre><code>$ ssh-keygen -t rsa -b 4096 -C &quot;$(git config user.email)&quot; -f gh-pages -N &quot;&quot;
-</code></pre><p>githubのレポジトリの</p><p>Deploy Keysに公開鍵を追加</p><p>Allow write accessにチェックを入れるのを忘れずに。</p><p>Secretsに秘密鍵を追加</p></div></article></main></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2019 おとまるかんたのブログ.
+</code></pre><p>draftの行を消すかfalseにすることで生成対象のMarkdownになります。
+<code>archetypes/default.md</code>を編集することで、記事新規作成時のテンプレートを編集することが可能です。</p><pre><code>$ cat archetypes/default.md
+---
+title: &quot;{{ replace .Name &quot;-&quot; &quot; &quot; | title }}&quot;
+date: {{ .Date }}
+draft: true
+---
+</code></pre><p>そして、本文を書き始めます。
+今回はこの記事を書いています。</p><h3 id=html-css-js生成>HTML/CSS/JS生成</h3><p>以下のコマンドを実行するだけで、<code>public</code>ディレクトリ配下にHTML/CSS/JSが生成されます。</p><pre><code>$ hugo
+</code></pre><h3 id=github-pagesで公開>GitHub Pagesで公開</h3><p>生成されたファイルを使うことで、ブログを公開することができます。
+今回は<code>public</code>ディレクトリ配下に生成された成果物を<code>gh-pages</code>ブランチにコミットすることでGitHub Pagesで公開できます。</p><p><code>https://github.com/&lt;username&gt;/&lt;repository&gt;</code>のレポジトリにプッシュした場合、<code>https://&lt;username&gt;.github.io/&lt;repository&gt;/</code>のURLでブログが公開できます。
+今回は<a href=https://github.com/otomarukanta/blog>https://github.com/otomarukanta/blog</a> のレポジトリにあげているため、<a href=https://otomarukanta.github.io/blog/>https://otomarukanta.github.io/blog/</a> に書いた記事が公開されるようになります。</p><h3 id=独自ドメインの設定>独自ドメインの設定</h3><p>今回は独自ドメインを設定したいのでレポジトリのSettingsから「Github Pages」の欄から「Custom domain」を設定します。
+今回は<code>blog.otomarukanta.com</code>設定します。</p><p>この設定を加えることで、<a href=https://github.com/otomarukanta/blog/commit/20ed20beb2dba7899112a2cfb0209aca4b351f5a>CNAMEを作成するコミット</a>が自動で実行されます。</p><p><a href=https://blog.otomarukanta.com/>https://blog.otomarukanta.com/</a> にアクセス
+次に、お名前.comやムームードメインなどのドメイン管理サイト側で設定をします。</p><p>今回はムームードメインを利用しているので、以下のような設定を追加します。</p><table><thead><tr><th>サブドメイン</th><th>種別</th><th>内容</th></tr></thead><tbody><tr><td>blog</td><td>CNAME</td><td>otomarukanta.github.io</td></tr></tbody></table><p>この段階で、<a href=https://blog.otomarukanta.com/>https://blog.otomarukanta.com/</a> でブログが公開できています。</p><h3 id=github-actionsで自動デプロイ>GitHub Actionsで自動デプロイ</h3><p>GitHub Actionsで以下の作業を自動化していきます。</p><ul><li>トリガーはmasterブランチへのコミット</li><li><code>hugo</code>コマンドを利用してHTML/CSS/JSなどを生成</li><li>生成したものをgh-pagesブランチへコミット</li></ul><p>このようなGitHub Actionsをすでに作られている方がいるので、流用します。
+<a href=https://github.com/marketplace/actions/github-pages-action>GitHub Pages action</a></p><p>以下のコマンドでSSH鍵を生成します。</p><pre><code>$ ssh-keygen -t rsa -b 4096 -C &quot;$(git config user.email)&quot; -f gh-pages -N &quot;&quot;
+</code></pre><p>GitHubのレポジトリのSettingsからDeploy Keysに公開鍵を追加します。
+このときにAllow write accessにチェックを入れるのを忘れずに。</p><p>同じくSettingsからSecretsにNameが<code>ACTIONS_DEPLOY_KEY</code>の秘密鍵を追加します。</p><p>以下のworkflowの定義を利用します。基本的にはドキュメントにかかれているサンプルをそのまま利用していますが、テーマにsubmoduleを利用しているので、<code>actions/checkout</code>のステップの<code>submodules: true</code>を忘れずに。</p><pre><code>name: github pages
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@master
+      with:
+        submodules: true
+
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2.2.2
+      with:
+        hugo-version: '0.59.1'
+
+    - name: Build
+      run: hugo --minify
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2.5.0
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: ./public
+</code></pre><p>この設定まで終わると、<code>master</code>ブランチにコミットすると自動でファイルを生成し<code>gh-pages</code>にあげてくれます。</p></div></article></main></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2019 おとまるかんたのブログ.
 <span class=footer__copyright-credits>Generated with <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> and <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a> theme.</span></div></div></footer></div><script async defer src=https://blog.otomarukanta.com/js/menu.js></script></body></html>
