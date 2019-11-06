@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>おとまるかんたのブログ</title><link>https://blog.otomarukanta.com/</link><description>Recent content on おとまるかんたのブログ</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Wed, 06 Nov 2019 00:00:00 +0900</lastBuildDate><atom:link href="https://blog.otomarukanta.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugoでブログを構築する</title><link>https://blog.otomarukanta.com/post/create-hugo-site/</link><pubDate>Wed, 06 Nov 2019 00:00:00 +0900</pubDate><guid>https://blog.otomarukanta.com/post/create-hugo-site/</guid><description>今回はHugoを用いてこのブログを構築していきます。
+Hugoとは Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.
+https://gohugo.io/
+Go言語で作られた静的サイトジェネレータのOSSです。 Markdownで書かれたものからHTML/CSS/JSを生成してくれるので、生成されたファイルを適当な場所にアップロードするだけでブログなどが公開できます。
+静的サイトジェネレータは他にも以下のようなものがあります。
+jekyll(Ruby製) Hexo(Node製) Hugoの導入方法 公式のインストール方法を見ながらHugoを導入していく。 今回はReleaseページからバイナリを落としてきて利用する。
+https://github.com/gohugoio/hugo/releases
+# PATHが通っているところにバイナリを置く $ curl -sL https://github.com/gohugoio/hugo/releases/download/v0.59.1/hugo_0.59.1_Linux-64bit.tar.gz | tar zxv -C ~/bin/ hugo hugo $ hugo version Hugo Static Site Generator v0.59.1-D5DAB232 linux/amd64 BuildDate: 2019-10-31T15:21:02Z サイト作成 Hugoで管理していく設定ファイルやディレクトリ構成を作成していきます。 以下のコマンドを実行することで、blogディレクトリにひな形が生成されます。 $ hugo new site blog Congratulations!</description></item></channel></rss>
