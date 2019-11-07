@@ -4,3 +4,27 @@ googleAnalytics = "UA-119109457-1"
 languageCode = "ja"
 title = "おとまるかんたのブログ"
 theme = "mainroad"
+
+[Author] # Used in authorbox
+  name = "おとまるかんた"
+  bio = "音楽/アニメ/競馬/株と多趣味。仕事ではビッグなデータを、趣味ではスモールなデータをいじってます。"
+  avatar = "img/avatar.png"
+
+[Params]
+  authorbox = true
+  description = "技術的なことや趣味など雑多なことを書くブログです。"
+  toc = true
+  readmore = true
+  post_meta = ["date"]
+  dateformat = "2006/01/02"
+
+[Params.sidebar]
+  home = "right"
+  list = "left"
+  single = true
+  widgets = ["search", "recent", "categories", "taglist", "social", "languages"]
+
+[Params.widgets.social]
+  twitter = "otomarukanta"
+  linkedin = "kanta-kuramoto-944a20151"
+  github = "otomarukanta"
